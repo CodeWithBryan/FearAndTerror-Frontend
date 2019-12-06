@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injectable, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,20 +14,6 @@ import { WelcomeSectionImageComponent } from './components/welcome-section-image
 import { LivestreamGalleryComponent } from './components/livestream-gallery/livestream-gallery.component';
 import { QuestionAnswerSectionComponent } from './components/question-answer-section/question-answer-section.component';
 import { FooterComponent } from './components/footer/footer.component';
-import * as Sentry from '@sentry/browser';
-
-Sentry.init({
-  dsn: 'https://8acf036f6ab8495588ad5b2355c1b5ec@sentry.io/1848381'
-});
-
-@Injectable()
-export class SentryErrorHandler implements ErrorHandler {
-  constructor() {}
-  handleError(error) {
-    const eventId = Sentry.captureException(error.originalError || error);
-    Sentry.showReportDialog({ eventId });
-  }
-}
 
 @NgModule({
   declarations: [
@@ -48,7 +34,7 @@ export class SentryErrorHandler implements ErrorHandler {
     BrowserAnimationsModule,
     CarouselModule,
   ],
-  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
